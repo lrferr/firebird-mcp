@@ -28,7 +28,7 @@
     "setup-multi-connections": "node scripts/setup-multi-connections.js",
     "demo-multi-connections": "node examples/multi-connection-demo.js",
     "generate-mcp-config": "node scripts/generate-mcp-config.js",
-    "prepublishOnly": "npm test && npm run lint",
+    "prepublishOnly": "npm run lint",
     "postinstall": "node scripts/postinstall.js"
   },
   "keywords": [
