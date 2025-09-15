@@ -100,7 +100,7 @@ export class DMLOperations {
   }
 
   formatSelectResult(result, columns, limit) {
-    let output = `## Resultado da Consulta\n\n`;
+    let output = '## Resultado da Consulta\n\n';
     output += `**Total de registros encontrados:** ${result.length}\n\n`;
     
     if (result.length > 0) {
@@ -309,10 +309,10 @@ export class DMLOperations {
   }
 
   formatProcedureResult(result) {
-    let output = `## Resultado da Stored Procedure\n\n`;
+    let output = '## Resultado da Stored Procedure\n\n';
     
     if (result && result.length > 0) {
-      output += `**Resultado:**\n\n`;
+      output += '**Resultado:**\n\n';
       
       if (Array.isArray(result)) {
         // Múltiplos registros
@@ -493,13 +493,13 @@ export class DMLOperations {
       // Confirmar transação
       await this.commitTransaction(db);
       
-      let output = `## Resultado do Batch Insert\n\n`;
+      let output = '## Resultado do Batch Insert\n\n';
       output += `**Total de registros processados:** ${dataArray.length}\n`;
       output += `**Sucessos:** ${successCount}\n`;
       output += `**Erros:** ${errorCount}\n\n`;
       
       if (errors.length > 0) {
-        output += `**Erros encontrados:**\n`;
+        output += '**Erros encontrados:**\n';
         errors.forEach(error => {
           output += `- ${error}\n`;
         });

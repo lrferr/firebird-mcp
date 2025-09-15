@@ -505,26 +505,26 @@ export class NotificationService {
         const cleanValue = value.replace(/^"|"$/g, '').replace(/""/g, '"');
         
         switch (header) {
-          case 'id':
-            notification.id = cleanValue;
-            break;
-          case 'type':
-            notification.type = cleanValue;
-            break;
-          case 'message':
-            notification.message = cleanValue;
-            break;
-          case 'timestamp':
-            notification.timestamp = cleanValue;
-            break;
-          case 'read':
-            notification.read = cleanValue === 'true';
-            break;
-          default:
-            if (!notification.details) {
-              notification.details = {};
-            }
-            notification.details[header] = cleanValue;
+        case 'id':
+          notification.id = cleanValue;
+          break;
+        case 'type':
+          notification.type = cleanValue;
+          break;
+        case 'message':
+          notification.message = cleanValue;
+          break;
+        case 'timestamp':
+          notification.timestamp = cleanValue;
+          break;
+        case 'read':
+          notification.read = cleanValue === 'true';
+          break;
+        default:
+          if (!notification.details) {
+            notification.details = {};
+          }
+          notification.details[header] = cleanValue;
         }
       });
 

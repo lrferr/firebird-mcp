@@ -96,7 +96,7 @@ export class MigrationValidator {
       for (let j = 0; j < line.length; j++) {
         const char = line[j];
         
-        if (!inString && (char === "'" || char === '"')) {
+        if (!inString && (char === '\'' || char === '"')) {
           inString = true;
           stringChar = char;
         } else if (inString && char === stringChar) {
@@ -269,13 +269,13 @@ export class MigrationValidator {
   }
 
   formatValidationResult(results) {
-    let output = `## Validação do Script de Migração\n\n`;
+    let output = '## Validação do Script de Migração\n\n';
 
     // Status geral
     if (results.isValid) {
-      output += `✅ **Script válido** - Pode ser executado com segurança\n\n`;
+      output += '✅ **Script válido** - Pode ser executado com segurança\n\n';
     } else {
-      output += `❌ **Script inválido** - Corrija os erros antes de executar\n\n`;
+      output += '❌ **Script inválido** - Corrija os erros antes de executar\n\n';
     }
 
     // Erros
@@ -306,16 +306,16 @@ export class MigrationValidator {
     }
 
     // Resumo
-    output += `### 📊 Resumo\n\n`;
+    output += '### 📊 Resumo\n\n';
     output += `- **Status:** ${results.isValid ? 'Válido' : 'Inválido'}\n`;
     output += `- **Erros:** ${results.errors.length}\n`;
     output += `- **Avisos:** ${results.warnings.length}\n`;
     output += `- **Sugestões:** ${results.suggestions.length}\n`;
 
     if (results.isValid) {
-      output += `\n✅ **O script pode ser executado com segurança.**\n`;
+      output += '\n✅ **O script pode ser executado com segurança.**\n';
     } else {
-      output += `\n❌ **Corrija os erros antes de executar o script.**\n`;
+      output += '\n❌ **Corrija os erros antes de executar o script.**\n';
     }
 
     return output;

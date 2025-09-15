@@ -367,7 +367,7 @@ export class SecurityAudit {
   }
 
   formatAuditReport(entries, options) {
-    let report = `## Relatório de Auditoria\n\n`;
+    let report = '## Relatório de Auditoria\n\n';
     report += `**Período:** ${options.startDate} até ${options.endDate}\n`;
     report += `**Total de operações:** ${entries.length}\n\n`;
 
@@ -402,15 +402,15 @@ export class SecurityAudit {
     });
 
     // Resumo
-    report += `### Resumo\n`;
+    report += '### Resumo\n';
     report += `- **Operações bem-sucedidas:** ${successCount}\n`;
     report += `- **Operações falhadas:** ${entries.length - successCount}\n`;
     report += `- **Taxa de sucesso:** ${((successCount / entries.length) * 100).toFixed(2)}%\n\n`;
 
     // Top usuários
-    report += `### Top Usuários\n`;
-    report += `| Usuário | Total | Sucessos | Falhas | Taxa Sucesso |\n`;
-    report += `|---------|-------|----------|--------|-------------|\n`;
+    report += '### Top Usuários\n';
+    report += '| Usuário | Total | Sucessos | Falhas | Taxa Sucesso |\n';
+    report += '|---------|-------|----------|--------|-------------|\n';
     
     Object.entries(userStats)
       .sort(([,a], [,b]) => b.total - a.total)
@@ -420,9 +420,9 @@ export class SecurityAudit {
         report += `| ${user} | ${stats.total} | ${stats.success} | ${stats.failed} | ${successRate}% |\n`;
       });
 
-    report += `\n### Top Operações\n`;
-    report += `| Operação | Quantidade |\n`;
-    report += `|----------|------------|\n`;
+    report += '\n### Top Operações\n';
+    report += '| Operação | Quantidade |\n';
+    report += '|----------|------------|\n';
     
     Object.entries(operationStats)
       .sort(([,a], [,b]) => b - a)
@@ -432,9 +432,9 @@ export class SecurityAudit {
       });
 
     // Operações recentes
-    report += `\n### Operações Recentes\n`;
-    report += `| Timestamp | Usuário | Operação | Recurso | Sucesso |\n`;
-    report += `|-----------|---------|----------|---------|----------|\n`;
+    report += '\n### Operações Recentes\n';
+    report += '| Timestamp | Usuário | Operação | Recurso | Sucesso |\n';
+    report += '|-----------|---------|----------|---------|----------|\n';
     
     entries
       .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))

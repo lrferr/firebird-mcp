@@ -121,20 +121,20 @@ export class DDLOperations {
         let definition = `  CONSTRAINT ${constraint.name} `;
         
         switch (constraint.type) {
-          case 'PRIMARY KEY':
-            definition += `PRIMARY KEY (${constraint.columns.join(', ')})`;
-            break;
-          case 'UNIQUE':
-            definition += `UNIQUE (${constraint.columns.join(', ')})`;
-            break;
-          case 'CHECK':
-            definition += `CHECK (${constraint.condition})`;
-            break;
-          case 'FOREIGN KEY':
-            definition += `FOREIGN KEY (${constraint.columns.join(', ')}) REFERENCES ${constraint.referencedTable}(${constraint.referencedColumns.join(', ')})`;
-            break;
-          default:
-            throw new Error(`Tipo de constraint não suportado: ${constraint.type}`);
+        case 'PRIMARY KEY':
+          definition += `PRIMARY KEY (${constraint.columns.join(', ')})`;
+          break;
+        case 'UNIQUE':
+          definition += `UNIQUE (${constraint.columns.join(', ')})`;
+          break;
+        case 'CHECK':
+          definition += `CHECK (${constraint.condition})`;
+          break;
+        case 'FOREIGN KEY':
+          definition += `FOREIGN KEY (${constraint.columns.join(', ')}) REFERENCES ${constraint.referencedTable}(${constraint.referencedColumns.join(', ')})`;
+          break;
+        default:
+          throw new Error(`Tipo de constraint não suportado: ${constraint.type}`);
         }
         
         return definition;
@@ -184,26 +184,26 @@ export class DDLOperations {
       let sql;
       
       switch (operation) {
-        case 'ADD_COLUMN':
-          sql = this.buildAddColumnSQL(tableName, columnName, columnType, columnLength, notNull, defaultValue);
-          break;
-        case 'MODIFY_COLUMN':
-          sql = this.buildModifyColumnSQL(tableName, columnName, columnType, columnLength, notNull, defaultValue);
-          break;
-        case 'DROP_COLUMN':
-          sql = this.buildDropColumnSQL(tableName, columnName);
-          break;
-        case 'ADD_CONSTRAINT':
-          sql = this.buildAddConstraintSQL(tableName, constraintName, constraintType, constraintColumns, constraintCondition, referencedTable, referencedColumns);
-          break;
-        case 'DROP_CONSTRAINT':
-          sql = this.buildDropConstraintSQL(tableName, constraintName);
-          break;
-        case 'RENAME_COLUMN':
-          sql = this.buildRenameColumnSQL(tableName, columnName, newColumnName);
-          break;
-        default:
-          throw new Error(`Operação não suportada: ${operation}`);
+      case 'ADD_COLUMN':
+        sql = this.buildAddColumnSQL(tableName, columnName, columnType, columnLength, notNull, defaultValue);
+        break;
+      case 'MODIFY_COLUMN':
+        sql = this.buildModifyColumnSQL(tableName, columnName, columnType, columnLength, notNull, defaultValue);
+        break;
+      case 'DROP_COLUMN':
+        sql = this.buildDropColumnSQL(tableName, columnName);
+        break;
+      case 'ADD_CONSTRAINT':
+        sql = this.buildAddConstraintSQL(tableName, constraintName, constraintType, constraintColumns, constraintCondition, referencedTable, referencedColumns);
+        break;
+      case 'DROP_CONSTRAINT':
+        sql = this.buildDropConstraintSQL(tableName, constraintName);
+        break;
+      case 'RENAME_COLUMN':
+        sql = this.buildRenameColumnSQL(tableName, columnName, newColumnName);
+        break;
+      default:
+        throw new Error(`Operação não suportada: ${operation}`);
       }
       
       return new Promise((resolve, reject) => {
@@ -261,20 +261,20 @@ export class DDLOperations {
     let sql = `ALTER TABLE ${tableName} ADD CONSTRAINT ${constraintName} `;
     
     switch (constraintType) {
-      case 'PRIMARY KEY':
-        sql += `PRIMARY KEY (${constraintColumns.join(', ')})`;
-        break;
-      case 'UNIQUE':
-        sql += `UNIQUE (${constraintColumns.join(', ')})`;
-        break;
-      case 'CHECK':
-        sql += `CHECK (${constraintCondition})`;
-        break;
-      case 'FOREIGN KEY':
-        sql += `FOREIGN KEY (${constraintColumns.join(', ')}) REFERENCES ${referencedTable}(${referencedColumns.join(', ')})`;
-        break;
-      default:
-        throw new Error(`Tipo de constraint não suportado: ${constraintType}`);
+    case 'PRIMARY KEY':
+      sql += `PRIMARY KEY (${constraintColumns.join(', ')})`;
+      break;
+    case 'UNIQUE':
+      sql += `UNIQUE (${constraintColumns.join(', ')})`;
+      break;
+    case 'CHECK':
+      sql += `CHECK (${constraintCondition})`;
+      break;
+    case 'FOREIGN KEY':
+      sql += `FOREIGN KEY (${constraintColumns.join(', ')}) REFERENCES ${referencedTable}(${referencedColumns.join(', ')})`;
+      break;
+    default:
+      throw new Error(`Tipo de constraint não suportado: ${constraintType}`);
     }
     
     return sql;

@@ -556,7 +556,7 @@ export class DCLOperations {
   }
 
   formatUsersResult(result) {
-    let output = `## Usuários do Sistema\n\n`;
+    let output = '## Usuários do Sistema\n\n';
     output += `**Total de usuários:** ${result.length}\n\n`;
     
     if (result.length > 0) {
@@ -681,7 +681,7 @@ export class DCLOperations {
   }
 
   formatRolesResult(result) {
-    let output = `## Roles do Sistema\n\n`;
+    let output = '## Roles do Sistema\n\n';
     output += `**Total de roles:** ${result.length}\n\n`;
     
     if (result.length > 0) {

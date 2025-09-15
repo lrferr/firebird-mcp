@@ -431,58 +431,58 @@ class FirebirdMCPServer {
 
   async handleToolCall(name, args) {
     switch (name) {
-      case 'check_database_health':
-        return await this.handleCheckDatabaseHealth(args);
-      case 'get_database_info':
-        return await this.handleGetDatabaseInfo(args);
-      case 'get_table_info':
-        return await this.handleGetTableInfo(args);
-      case 'get_generators':
-        return await this.handleGetGenerators(args);
-      case 'get_domains':
-        return await this.handleGetDomains(args);
-      case 'get_procedures':
-        return await this.handleGetProcedures(args);
-      case 'get_functions':
-        return await this.handleGetFunctions(args);
-      case 'get_triggers':
-        return await this.handleGetTriggers(args);
-      case 'get_views':
-        return await this.handleGetViews(args);
-      case 'backup_database':
-        return await this.handleBackupDatabase(args);
-      case 'restore_database':
-        return await this.handleRestoreDatabase(args);
-      case 'validate_database':
-        return await this.handleValidateDatabase(args);
-      case 'create_table':
-        return await this.handleCreateTable(args);
-      case 'select_data':
-        return await this.handleSelectData(args);
-      case 'insert_data':
-        return await this.handleInsertData(args);
-      case 'update_data':
-        return await this.handleUpdateData(args);
-      case 'delete_data':
-        return await this.handleDeleteData(args);
-      case 'create_user':
-        return await this.handleCreateUser(args);
-      case 'grant_privileges':
-        return await this.handleGrantPrivileges(args);
-      case 'revoke_privileges':
-        return await this.handleRevokePrivileges(args);
-      case 'generate_audit_report':
-        return await this.handleGenerateAuditReport(args);
-      case 'detect_suspicious_activity':
-        return await this.handleDetectSuspiciousActivity(args);
-      case 'list_connections':
-        return await this.handleListConnections();
-      case 'test_connection':
-        return await this.handleTestConnection(args);
-      case 'test_all_connections':
-        return await this.handleTestAllConnections();
-      default:
-        throw new Error(`Ferramenta desconhecida: ${name}`);
+    case 'check_database_health':
+      return await this.handleCheckDatabaseHealth(args);
+    case 'get_database_info':
+      return await this.handleGetDatabaseInfo(args);
+    case 'get_table_info':
+      return await this.handleGetTableInfo(args);
+    case 'get_generators':
+      return await this.handleGetGenerators(args);
+    case 'get_domains':
+      return await this.handleGetDomains(args);
+    case 'get_procedures':
+      return await this.handleGetProcedures(args);
+    case 'get_functions':
+      return await this.handleGetFunctions(args);
+    case 'get_triggers':
+      return await this.handleGetTriggers(args);
+    case 'get_views':
+      return await this.handleGetViews(args);
+    case 'backup_database':
+      return await this.handleBackupDatabase(args);
+    case 'restore_database':
+      return await this.handleRestoreDatabase(args);
+    case 'validate_database':
+      return await this.handleValidateDatabase(args);
+    case 'create_table':
+      return await this.handleCreateTable(args);
+    case 'select_data':
+      return await this.handleSelectData(args);
+    case 'insert_data':
+      return await this.handleInsertData(args);
+    case 'update_data':
+      return await this.handleUpdateData(args);
+    case 'delete_data':
+      return await this.handleDeleteData(args);
+    case 'create_user':
+      return await this.handleCreateUser(args);
+    case 'grant_privileges':
+      return await this.handleGrantPrivileges(args);
+    case 'revoke_privileges':
+      return await this.handleRevokePrivileges(args);
+    case 'generate_audit_report':
+      return await this.handleGenerateAuditReport(args);
+    case 'detect_suspicious_activity':
+      return await this.handleDetectSuspiciousActivity(args);
+    case 'list_connections':
+      return await this.handleListConnections();
+    case 'test_connection':
+      return await this.handleTestConnection(args);
+    case 'test_all_connections':
+      return await this.handleTestAllConnections();
+    default:
+      throw new Error(`Ferramenta desconhecida: ${name}`);
     }
   }
 

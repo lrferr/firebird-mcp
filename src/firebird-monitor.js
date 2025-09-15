@@ -139,7 +139,7 @@ export class FirebirdMonitor {
         } else {
           if (result.length > 0) {
             const db = result[0];
-            let output = `**Informações do Banco:**\n`;
+            let output = '**Informações do Banco:**\n';
             output += `- **Nome:** ${db.MON$DATABASE_NAME}\n`;
             output += `- **Tamanho da Página:** ${db.MON$PAGE_SIZE} bytes\n`;
             output += `- **Total de Páginas:** ${db.MON$PAGES}\n`;
@@ -170,7 +170,7 @@ export class FirebirdMonitor {
         if (err) {
           reject(err);
         } else {
-          let output = `**Métricas de Performance:**\n\n`;
+          let output = '**Métricas de Performance:**\n\n';
           
           if (result.length > 0) {
             output += '| Métrica | Valor |\n';
@@ -393,7 +393,7 @@ export class FirebirdMonitor {
           reject(err);
         } else {
           if (result.length > 0) {
-            let output = `**Colunas da tabela:**\n\n`;
+            let output = '**Colunas da tabela:**\n\n';
             output += '| Posição | Nome | Tipo | Tamanho | Precisão | Escala | Nulo | Padrão |\n';
             output += '|---------|------|------|---------|----------|--------|------|--------|\n';
             
@@ -510,7 +510,7 @@ export class FirebirdMonitor {
           if (err) {
             reject(err);
           } else {
-            let output = `## Generators do Firebird\n\n`;
+            let output = '## Generators do Firebird\n\n';
             output += `**Total de generators:** ${result.length}\n\n`;
             
             if (result.length > 0) {
@@ -583,7 +583,7 @@ export class FirebirdMonitor {
           if (err) {
             reject(err);
           } else {
-            let output = `## Domains do Firebird\n\n`;
+            let output = '## Domains do Firebird\n\n';
             output += `**Total de domains:** ${result.length}\n\n`;
             
             if (result.length > 0) {
@@ -637,7 +637,7 @@ export class FirebirdMonitor {
           if (err) {
             reject(err);
           } else {
-            let output = `## Stored Procedures do Firebird\n\n`;
+            let output = '## Stored Procedures do Firebird\n\n';
             output += `**Total de procedures:** ${result.length}\n\n`;
             
             if (result.length > 0) {
@@ -707,7 +707,7 @@ export class FirebirdMonitor {
           if (err) {
             reject(err);
           } else {
-            let output = `## Functions do Firebird\n\n`;
+            let output = '## Functions do Firebird\n\n';
             output += `**Total de functions:** ${result.length}\n\n`;
             
             if (result.length > 0) {
@@ -785,7 +785,7 @@ export class FirebirdMonitor {
           if (err) {
             reject(err);
           } else {
-            let output = `## Triggers do Firebird\n\n`;
+            let output = '## Triggers do Firebird\n\n';
             output += `**Total de triggers:** ${result.length}\n\n`;
             
             if (result.length > 0) {
@@ -854,7 +854,7 @@ export class FirebirdMonitor {
           if (err) {
             reject(err);
           } else {
-            let output = `## Views do Firebird\n\n`;
+            let output = '## Views do Firebird\n\n';
             output += `**Total de views:** ${result.length}\n\n`;
             
             if (result.length > 0) {
