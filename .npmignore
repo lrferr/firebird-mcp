@@ -1,0 +1,70 @@
+# Source files (keep only compiled/built files)
+src/
+tests/
+scripts/
+examples/
+
+# Development files
+.env
+.env.*
+.git/
+.gitignore
+.npmignore
+.editorconfig
+.eslintrc*
+.prettierrc*
+
+# Documentation (keep only essential)
+docs/
+documentation/
+*.md
+!README.md
+
+# Test files
+test/
+tests/
+__tests__/
+*.test.js
+*.spec.js
+
+# Development dependencies
+node_modules/
+package-lock.json
+yarn.lock
+
+# Logs
+logs/
+*.log
+
+# Temporary files
+tmp/
+temp/
+.tmp/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Firebird database files
+*.fdb
+*.fbk
+*.gdb
+
+# Backup files
+backups/
+*.backup
+*.bak
+
+# Coverage
+coverage/
+.nyc_output/
+
+# Build artifacts (if any)
+build/
+dist/

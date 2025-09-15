@@ -1,0 +1,28 @@
+{
+  "connections": [
+    {
+      "name": "default",
+      "description": "Conexão padrão do Firebird",
+      "environment": "development",
+      "host": "localhost",
+      "port": 3050,
+      "database": "/path/to/your/database.fdb",
+      "user": "SYSDBA",
+      "password": "masterkey",
+      "role": "RDB$ADMIN",
+      "charset": "UTF8"
+    },
+    {
+      "name": "production",
+      "description": "Conexão de produção",
+      "environment": "production",
+      "host": "prod-server",
+      "port": 3050,
+      "database": "/data/production.fdb",
+      "user": "SYSDBA",
+      "password": "change_me",
+      "role": "RDB$ADMIN",
+      "charset": "UTF8"
+    }
+  ]
+}

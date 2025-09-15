@@ -1,0 +1,46 @@
+{
+  "connection": {
+    "poolMin": 1,
+    "poolMax": 10,
+    "poolIncrement": 1,
+    "poolTimeout": 60,
+    "poolPingInterval": 60
+  },
+  "monitoring": {
+    "healthCheckInterval": 300000,
+    "backupCheckInterval": 3600000,
+    "performanceCheckInterval": 300000,
+    "schemaCheckInterval": 600000
+  },
+  "alerts": {
+    "databaseSizeThreshold": 1073741824,
+    "connectionThreshold": 50,
+    "performanceThreshold": 1000,
+    "slowQueryThreshold": 5000,
+    "failedLoginThreshold": 5
+  },
+  "backup": {
+    "defaultPath": "./backups",
+    "compress": true,
+    "retentionDays": 30,
+    "schedule": "0 2 * * *"
+  },
+  "security": {
+    "auditRetentionDays": 90,
+    "maxFailedAttempts": 5,
+    "lockoutDuration": 300000,
+    "sensitiveTables": [
+      "USERS",
+      "PASSWORDS", 
+      "CREDENTIALS",
+      "TOKENS",
+      "SESSIONS"
+    ]
+  },
+  "logging": {
+    "level": "info",
+    "maxFileSize": "5MB",
+    "maxFiles": 5,
+    "retentionDays": 30
+  }
+}

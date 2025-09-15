@@ -1,0 +1,53 @@
+{
+  "sensitiveTables": [
+    "USERS",
+    "PASSWORDS",
+    "CREDENTIALS",
+    "TOKENS",
+    "SESSIONS",
+    "AUDIT_LOG",
+    "SECURITY_EVENTS"
+  ],
+  "maxFailedAttempts": 5,
+  "lockoutDuration": 300000,
+  "auditRetentionDays": 90,
+  "alertOnSuspiciousActivity": true,
+  "allowedOperations": [
+    "SELECT",
+    "INSERT",
+    "UPDATE",
+    "DELETE",
+    "EXECUTE"
+  ],
+  "restrictedOperations": [
+    "DROP",
+    "ALTER",
+    "CREATE",
+    "GRANT",
+    "REVOKE",
+    "TRUNCATE"
+  ],
+  "passwordPolicy": {
+    "minLength": 8,
+    "requireUppercase": true,
+    "requireLowercase": true,
+    "requireNumbers": true,
+    "requireSpecialChars": true,
+    "maxAge": 90
+  },
+  "sessionPolicy": {
+    "maxDuration": 3600000,
+    "idleTimeout": 1800000,
+    "maxConcurrentSessions": 3
+  },
+  "ipWhitelist": [],
+  "ipBlacklist": [],
+  "allowedUsers": [],
+  "restrictedUsers": [],
+  "auditSettings": {
+    "logAllOperations": true,
+    "logFailedOperations": true,
+    "logSensitiveAccess": true,
+    "logPerformanceIssues": true
+  }
+}
