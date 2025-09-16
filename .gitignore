@@ -11,6 +11,11 @@ yarn-error.log*
 .env.test.local
 .env.production.local
 
+# Configuration files with sensitive data
+config/local-connections.json
+config/production-connections.json
+config/*-sensitive.json
+
 # Logs
 logs/
 *.log

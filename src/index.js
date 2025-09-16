@@ -39,6 +39,7 @@ class FirebirdMCPServer {
     this.logger = new Logger();
     
     // Inicializar ConnectionManager para múltiplas conexões
+    // Priorizar arquivo local-connections.json se existir
     this.connectionManager = new ConnectionManager();
     
     // Inicializar módulos com ConnectionManager

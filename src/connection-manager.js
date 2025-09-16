@@ -4,7 +4,7 @@ import fs from 'fs';
 import os from 'os';
 
 export class ConnectionManager {
-  constructor(configPath = './config/multi-connections.json') {
+  constructor(configPath = null) {
     this.logger = new Logger();
     this.connections = new Map();
     this.configPath = configPath;
@@ -15,10 +15,44 @@ export class ConnectionManager {
 
   loadConfig() {
     try {
-      // Primeiro, tenta carregar do arquivo JSON
-      const configFile = fs.readFileSync(this.configPath, 'utf8');
-      this.config = JSON.parse(configFile);
-      this.logger.info('Configuração de múltiplas conexões carregada do arquivo JSON');
+      // Prioridade de carregamento:
+      // 1. Arquivo específico passado no construtor
+      // 2. Arquivo local-connections.json (dados sensíveis)
+      // 3. Arquivo multi-connections.json (template)
+      // 4. Variáveis de ambiente
+      // 5. Configuração padrão
+      
+      const configPaths = [
+        this.configPath,
+        './config/local-connections.json',
+        './config/multi-connections.json'
+      ].filter(Boolean);
+      
+      // Remover duplicatas mantendo a ordem de prioridade
+      const uniquePaths = [...new Set(configPaths)];
+      
+      this.logger.info(`Tentando carregar configuração dos seguintes caminhos: ${uniquePaths.join(', ')}`);
+
+      let configLoaded = false;
+      
+      for (const path of uniquePaths) {
+        try {
+          if (fs.existsSync(path)) {
+            const configFile = fs.readFileSync(path, 'utf8');
+            this.config = JSON.parse(configFile);
+            this.logger.info(`Configuração de múltiplas conexões carregada do arquivo: ${path}`);
+            configLoaded = true;
+            break;
+          }
+        } catch (pathError) {
+          this.logger.warn(`Erro ao carregar configuração de ${path}:`, pathError.message);
+          continue;
+        }
+      }
+
+      if (!configLoaded) {
+        throw new Error('Nenhum arquivo de configuração encontrado');
+      }
     } catch (fileError) {
       // Se falhar, tenta carregar das variáveis de ambiente
       try {

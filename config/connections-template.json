@@ -11,6 +11,18 @@
       "password": "masterkey",
       "role": "RDB$ADMIN",
       "charset": "UTF8"
+    },
+    {
+      "name": "production",
+      "description": "Conexão de produção - Template",
+      "environment": "production",
+      "host": "your-production-host",
+      "port": 3050,
+      "database": "/path/to/production/database.fdb",
+      "user": "your_user",
+      "password": "your_password",
+      "role": "RDB$ADMIN",
+      "charset": "UTF8"
     }
   ]
 }
