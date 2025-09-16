@@ -51,10 +51,14 @@ export class ConnectionManager {
       }
 
       if (!configLoaded) {
-        throw new Error('Nenhum arquivo de configuração encontrado');
+        this.logger.info('Nenhum arquivo de configuração encontrado, usando fallback para variáveis de ambiente');
       }
     } catch (fileError) {
-      // Se falhar, tenta carregar das variáveis de ambiente
+      this.logger.warn('Erro ao carregar arquivos de configuração:', fileError.message);
+    }
+    
+    // Se não carregou de arquivos, tenta variáveis de ambiente
+    if (!this.config) {
       try {
         const envConfig = process.env.FIREBIRD_CONNECTIONS;
         if (envConfig) {
