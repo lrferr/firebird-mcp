@@ -12,7 +12,7 @@ const logger = new Logger();
 program
   .name('firebird-mcp')
   .description('CLI para Firebird MCP Server')
-  .version('1.0.6');
+  .version('1.0.10');
 
 // Comando para testar conexão
 program
@@ -288,15 +288,12 @@ program
   .description('Inicia o servidor MCP')
   .action(async () => {
     try {
-      console.log(chalk.blue('🚀 Iniciando servidor MCP Firebird...'));
-      
       // Importar e iniciar o servidor
       const { default: server } = await import('../src/index.js');
       
-      console.log(chalk.green('✅ Servidor MCP iniciado com sucesso!'));
-      console.log(chalk.gray('   Pressione Ctrl+C para parar o servidor'));
+      // Servidor iniciado - não imprimir nada no stdout para não interferir com MCP
     } catch (error) {
-      console.log(chalk.red('❌ Erro ao iniciar servidor:'), error.message);
+      console.error(chalk.red('❌ Erro ao iniciar servidor:'), error.message);
       process.exit(1);
     }
   });
@@ -306,7 +303,7 @@ program
   .command('version')
   .description('Mostra a versão do Firebird MCP')
   .action(() => {
-    console.log(chalk.blue('Firebird MCP Server v1.0.0'));
+    console.log(chalk.blue('Firebird MCP Server v1.0.10'));
     console.log(chalk.gray('Servidor MCP para Firebird Database'));
   });
 

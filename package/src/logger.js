@@ -56,10 +56,10 @@ export class Logger {
           tailable: true
         }),
         
-        // Console (apenas em desenvolvimento)
+        // Console (apenas em desenvolvimento e quando não for servidor MCP)
         new winston.transports.Console({
           format: consoleFormat,
-          silent: process.env.NODE_ENV === 'production'
+          silent: process.env.NODE_ENV === 'production' || process.env.MCP_SERVER === 'true'
         })
       ],
       

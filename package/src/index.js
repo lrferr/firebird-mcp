@@ -17,6 +17,9 @@ import dotenv from 'dotenv';
 // Carregar variáveis de ambiente do .env (fallback)
 dotenv.config();
 
+// Definir que estamos rodando como servidor MCP
+process.env.MCP_SERVER = 'true';
+
 class FirebirdMCPServer {
   constructor() {
     // Priorizar variáveis de ambiente passadas pelo Cursor/Claude (mcp.json)
@@ -27,7 +30,7 @@ class FirebirdMCPServer {
     this.server = new Server(
       {
         name: getEnvVar('MCP_SERVER_NAME', 'firebird-monitor'),
-        version: getEnvVar('MCP_SERVER_VERSION', '1.0.0'),
+        version: getEnvVar('MCP_SERVER_VERSION', '1.0.10'),
       },
       {
         capabilities: {
