@@ -12,7 +12,7 @@ const logger = new Logger();
 program
   .name('firebird-mcp')
   .description('CLI para Firebird MCP Server')
-  .version('1.0.8');
+  .version('1.0.9');
 
 // Comando para testar conexão
 program
