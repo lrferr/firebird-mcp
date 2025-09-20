@@ -13,7 +13,7 @@ class FirebirdMCPSetup {
   }
 
   async run() {
-    console.log(chalk.blue('🔧 Configurando Firebird MCP Server...\n'));
+    console.log(chalk.blue('🔧 Configurando Firebird MCP Server - CSGD/AGTIC/UFPR...\n'));
 
     try {
       await this.createDirectories();

@@ -914,16 +914,16 @@ export class DDLOperations {
   async tableExists(db, tableName) {
     return new Promise((resolve, reject) => {
       const query = `
-        SELECT COUNT(*) as COUNT
+        SELECT RDB$RELATION_NAME
         FROM RDB$RELATIONS
-        WHERE RDB$RELATION_NAME = ? AND RDB$SYSTEM_FLAG = 0
+        WHERE RDB$RELATION_NAME = '${tableName}' AND RDB$SYSTEM_FLAG = 0
       `;
       
-      db.query(query, [tableName], (err, result) => {
+      db.query(query, (err, result) => {
         if (err) {
           reject(err);
         } else {
-          resolve(result.length > 0 && result[0].COUNT > 0);
+          resolve(result.length > 0);
         }
       });
     });

@@ -17,7 +17,7 @@ class FirebirdMCPExample {
   }
 
   async run() {
-    console.log(chalk.blue('🚀 Exemplo de uso do Firebird MCP Server\n'));
+    console.log(chalk.blue('🚀 Exemplo de uso do Firebird MCP Server - CSGD/AGTIC/UFPR\n'));
 
     try {
       await this.testConnection();

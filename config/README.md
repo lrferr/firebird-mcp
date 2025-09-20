@@ -45,15 +45,15 @@ No arquivo `~/.cursor/mcp.json`, use variáveis de ambiente:
   "mcpServers": {
     "firebird-mcp": {
       "command": "npx",
-      "args": ["firebird-mcp@latest"],
+      "args": ["firebird_mcp_server@latest"],
       "env": {
-        "FIREBIRD_HOST": "200.17.203.115",
+        "FIREBIRD_HOST": "localhost",
         "FIREBIRD_PORT": "3050",
-        "FIREBIRD_DATABASE": "/data/patrimonio.fdb",
-        "FIREBIRD_USER": "patrimonio",
-        "FIREBIRD_PASSWORD": "patr1m0n10",
+        "FIREBIRD_DATABASE": "/path/to/database.fdb",
+        "FIREBIRD_USER": "SYSDBA",
+        "FIREBIRD_PASSWORD": "masterkey",
         "FIREBIRD_ROLE": "RDB$ADMIN",
-        "FIREBIRD_CHARSET": "ISO8859-1"
+        "FIREBIRD_CHARSET": "UTF8"
       }
     }
   }
@@ -75,3 +75,4 @@ Se o MCP não conectar:
 2. Confirme se os dados de conexão estão corretos
 3. Teste a conexão com: `node scripts/test-connection.js`
 4. Verifique os logs em `logs/firebird-mcp.log`
+5. Consulte a documentação do projeto: [GitLab Wiki](https://gitlab.ufpr.br/mcp/firebird_mcp_server/-/wikis/home)

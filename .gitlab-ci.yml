@@ -1,0 +1,148 @@
+# GitLab CI/CD Configuration for Firebird MCP Server
+# CSGD/AGTIC/UFPR
+
+stages:
+  - test
+  - security
+  - build
+  - deploy
+
+variables:
+  NODE_VERSION: "18"
+  NPM_CACHE_KEY: "npm-cache-$CI_COMMIT_REF_SLUG"
+
+# Cache node_modules to speed up builds
+cache:
+  key: "$NPM_CACHE_KEY"
+  paths:
+    - node_modules/
+
+# Install dependencies
+install_dependencies:
+  stage: test
+  image: node:18-alpine
+  script:
+    - npm ci --cache .npm --prefer-offline
+  artifacts:
+    paths:
+      - node_modules/
+    expire_in: 1 hour
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+# Run linting
+lint:
+  stage: test
+  image: node:18-alpine
+  dependencies:
+    - install_dependencies
+  script:
+    - npm run lint
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+# Run unit tests
+test_unit:
+  stage: test
+  image: node:18-alpine
+  dependencies:
+    - install_dependencies
+  script:
+    - npm run test
+  artifacts:
+    reports:
+      junit: test-results.xml
+    when: always
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+# Run security tests
+test_security:
+  stage: security
+  image: node:18-alpine
+  dependencies:
+    - install_dependencies
+  script:
+    - npm audit --audit-level moderate
+    - npm run test:security
+  allow_failure: true
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+# Build the package
+build:
+  stage: build
+  image: node:18-alpine
+  dependencies:
+    - install_dependencies
+  script:
+    - npm run lint
+    - npm run test
+    - npm pack
+  artifacts:
+    paths:
+      - firebird_mcp_server-*.tgz
+    expire_in: 1 week
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_COMMIT_TAG
+
+# Deploy to staging (if needed)
+deploy_staging:
+  stage: deploy
+  image: node:18-alpine
+  dependencies:
+    - build
+  script:
+    - echo "Deploying to staging environment..."
+    - echo "Staging deployment would go here"
+  environment:
+    name: staging
+    url: https://staging.firebird-mcp.ufpr.br
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+# Deploy to production (only on tags)
+deploy_production:
+  stage: deploy
+  image: node:18-alpine
+  dependencies:
+    - build
+  script:
+    - echo "Deploying to production environment..."
+    - echo "Production deployment would go here"
+  environment:
+    name: production
+    url: https://firebird-mcp.ufpr.br
+  rules:
+    - if: $CI_COMMIT_TAG
+
+# Code quality check
+code_quality:
+  stage: test
+  image: node:18-alpine
+  dependencies:
+    - install_dependencies
+  script:
+    - npm run format
+    - git diff --exit-code
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+# Performance tests
+test_performance:
+  stage: test
+  image: node:18-alpine
+  dependencies:
+    - install_dependencies
+  script:
+    - npm run test:performance
+  allow_failure: true
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH

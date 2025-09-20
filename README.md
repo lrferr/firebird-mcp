@@ -1,6 +1,10 @@
 # Firebird MCP Server
 
-Servidor MCP (Model Context Protocol) completo para Firebird Database com operações DDL, DML, DCL, monitoramento e auditoria.
+**Servidor MCP (Model Context Protocol) para Firebird Database**
+
+Desenvolvido pela **CSGD** (Coordenadoria de Software e Gestão de Dados) da **AGTIC** (Agência de Tecnologia da Informação e Comunicação) da **UFPR** (Universidade Federal do Paraná).
+
+Este servidor oferece operações completas DDL, DML, DCL, monitoramento e auditoria para bancos de dados Firebird através do protocolo MCP.
 
 ## 🚀 Características
 
@@ -20,28 +24,34 @@ Servidor MCP (Model Context Protocol) completo para Firebird Database com opera�
 - Firebird Database 3.0 ou superior
 - Cliente Firebird instalado
 
-## 🛠️ Instalação
+## 🛠️ Instalação e Teste
 
-1. **Clone o repositório:**
-```bash
-git clone https://github.com/lrferr/firebird-node-mcp.git
-cd firebird-node-mcp
-```
-
-2. **Instale as dependências:**
+1. **Instale as dependências:**
 ```bash
 npm install
 ```
 
-3. **Configure o ambiente:**
+2. **Configure o ambiente:**
 ```bash
 npm run setup
 ```
 
-4. **Configure as variáveis de ambiente:**
+3. **Configure as variáveis de ambiente:**
 ```bash
 cp env.example .env
 # Edite o arquivo .env com suas configurações
+```
+
+4. **Teste a aplicação:**
+```bash
+# Teste básico da aplicação
+npm run test:app
+
+# Teste de conexão com o banco
+npm run test-connection
+
+# Iniciar o servidor MCP
+npm start
 ```
 
 ## ⚙️ Configuração
@@ -291,28 +301,11 @@ npm run test:performance
 
 ## 📚 Documentação
 
-- [Guia de Configuração](documentation/pt/guides/MCP-CONFIGURATION-GUIDE.md)
-- [Guia de Início Rápido](documentation/pt/guides/QUICKSTART.md)
-- [Múltiplas Conexões](documentation/pt/guides/MULTIPLE-CONNECTIONS.md)
-- [Solução de Problemas](documentation/pt/guides/TROUBLESHOOTING-ORACLE-CONNECTIVITY.md)
-
-## 🤝 Contribuição
-
-1. Fork o projeto
-2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
-3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
-4. Push para a branch (`git push origin feature/AmazingFeature`)
-5. Abra um Pull Request
-
-## 📄 Licença
-
-Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE](LICENSE) para detalhes.
+- [Guia de Configuração](config/README.md)
 
 ## 🆘 Suporte
 
-- **Issues**: [GitHub Issues](https://github.com/lrferr/firebird-node-mcp/issues)
-- **Documentação**: [Wiki](https://github.com/lrferr/firebird-node-mcp/wiki)
-- **Email**: lrferr@gmail.com
+- **Contato**: CSGD/AGTIC/UFPR
 
 ## 🙏 Agradecimentos
 
@@ -320,15 +313,6 @@ Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE](LICE
 - [node-firebird](https://github.com/hgourvest/node-firebird) - Driver Node.js para Firebird
 - [Model Context Protocol](https://modelcontextprotocol.io/) - Protocolo MCP
 
-## 📈 Roadmap
-
-- [ ] Suporte a Firebird 4.0
-- [ ] Interface web para administração
-- [ ] Métricas em tempo real
-- [ ] Suporte a clusters
-- [ ] Integração com sistemas de monitoramento
-- [ ] API REST adicional
-
 ---
 
-**Desenvolvido com ❤️ por [Leandro Ferreira](https://github.com/lrferr)**
+**Desenvolvido com ❤️ pela [CSGD/AGTIC/UFPR](https://gitlab.ufpr.br/mcp)**

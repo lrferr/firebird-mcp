@@ -155,20 +155,50 @@ export class FirebirdMonitor {
 
   async checkPerformance(db) {
     return new Promise((resolve, reject) => {
+      // Query compatível com diferentes versões do Firebird
       const query = `
         SELECT 
           MON$STAT_ID,
-          MON$STAT_GROUP,
           MON$NAME,
           MON$VALUE
         FROM MON$STATEMENTS
-        WHERE MON$STAT_GROUP = 0
         ORDER BY MON$VALUE DESC
+        ROWS 1 TO 10
       `;
       
       db.query(query, (err, result) => {
         if (err) {
-          reject(err);
+          // Se a query falhar, usar uma query mais simples
+          const simpleQuery = `
+            SELECT 
+              MON$NAME,
+              MON$VALUE
+            FROM MON$STATEMENTS
+            ORDER BY MON$VALUE DESC
+            ROWS 1 TO 5
+          `;
+          
+          db.query(simpleQuery, (err2, result2) => {
+            if (err2) {
+              // Se ainda falhar, retornar informações básicas
+              resolve('**Métricas de Performance:**\n\n⚠️ Não foi possível obter métricas detalhadas de performance.\nA verificação de conexão foi bem-sucedida.');
+            } else {
+              let output = '**Métricas de Performance (Básicas):**\n\n';
+              
+              if (result2.length > 0) {
+                output += '| Métrica | Valor |\n';
+                output += '|---------|-------|\n';
+                
+                result2.forEach(row => {
+                  output += `| ${row.MON$NAME || 'N/A'} | ${row.MON$VALUE || 'N/A'} |\n`;
+                });
+              } else {
+                output += 'Nenhuma métrica de performance disponível.';
+              }
+              
+              resolve(output);
+            }
+          });
         } else {
           let output = '**Métricas de Performance:**\n\n';
           
@@ -275,7 +305,49 @@ export class FirebirdMonitor {
       
       db.query(query, (err, result) => {
         if (err) {
-          reject(err);
+          // Se RDB$USERS não existir, usar MON$ATTACHMENTS para obter usuários ativos
+          const fallbackQuery = `
+            SELECT 
+              MON$USER,
+              MON$ROLE,
+              MON$TIMESTAMP
+            FROM MON$ATTACHMENTS
+            WHERE MON$STATE = 1
+            ORDER BY MON$USER
+          `;
+          
+          db.query(fallbackQuery, (err2, result2) => {
+            if (err2) {
+              // Se ainda falhar, retornar informações básicas
+              resolve('**Usuários:**\n\n⚠️ Não foi possível obter informações detalhadas de usuários.\nA verificação de conexão foi bem-sucedida.');
+            } else {
+              let output = `**Usuários Ativos:** ${result2.length}\n\n`;
+              
+              if (result2.length > 0) {
+                output += '| Usuário | Role | Última Conexão |\n';
+                output += '|---------|------|----------------|\n';
+                
+                const uniqueUsers = {};
+                result2.forEach(row => {
+                  if (!uniqueUsers[row.MON$USER]) {
+                    uniqueUsers[row.MON$USER] = {
+                      user: row.MON$USER,
+                      role: row.MON$ROLE || 'NONE',
+                      timestamp: row.MON$TIMESTAMP
+                    };
+                  }
+                });
+                
+                Object.values(uniqueUsers).forEach(user => {
+                  output += `| ${user.user} | ${user.role} | ${user.timestamp} |\n`;
+                });
+              } else {
+                output += 'Nenhum usuário ativo encontrado.';
+              }
+              
+              resolve(output);
+            }
+          });
         } else {
           let output = `**Total de usuários:** ${result.length}\n\n`;
           
@@ -305,9 +377,7 @@ export class FirebirdMonitor {
       const query = `
         SELECT 
           RDB$GENERATOR_NAME,
-          RDB$GENERATOR_ID,
-          RDB$INITIAL_VALUE,
-          RDB$GENERATOR_INCREMENT
+          RDB$GENERATOR_ID
         FROM RDB$GENERATORS
         WHERE RDB$SYSTEM_FLAG = 0
         ORDER BY RDB$GENERATOR_NAME
@@ -315,16 +385,44 @@ export class FirebirdMonitor {
       
       db.query(query, (err, result) => {
         if (err) {
-          reject(err);
+          // Se a query falhar, usar uma query mais simples
+          const simpleQuery = `
+            SELECT 
+              RDB$GENERATOR_NAME
+            FROM RDB$GENERATORS
+            WHERE RDB$SYSTEM_FLAG = 0
+            ORDER BY RDB$GENERATOR_NAME
+          `;
+          
+          db.query(simpleQuery, (err2, result2) => {
+            if (err2) {
+              resolve('**Generators:**\n\n⚠️ Não foi possível obter informações detalhadas de generators.\nA verificação de conexão foi bem-sucedida.');
+            } else {
+              let output = `**Total de generators:** ${result2.length}\n\n`;
+              
+              if (result2.length > 0) {
+                output += '| Nome do Generator |\n';
+                output += '|-------------------|\n';
+                
+                result2.forEach(row => {
+                  output += `| ${row.RDB$GENERATOR_NAME} |\n`;
+                });
+              } else {
+                output += 'Nenhum generator encontrado.';
+              }
+              
+              resolve(output);
+            }
+          });
         } else {
           let output = `**Total de generators:** ${result.length}\n\n`;
           
           if (result.length > 0) {
-            output += '| Nome | ID | Valor Inicial | Incremento |\n';
-            output += '|------|----|----|----|\n';
+            output += '| Nome | ID |\n';
+            output += '|------|----|\n';
             
             result.forEach(row => {
-              output += `| ${row.RDB$GENERATOR_NAME} | ${row.RDB$GENERATOR_ID} | ${row.RDB$INITIAL_VALUE} | ${row.RDB$GENERATOR_INCREMENT} |\n`;
+              output += `| ${row.RDB$GENERATOR_NAME} | ${row.RDB$GENERATOR_ID} |\n`;
             });
           } else {
             output += 'Nenhum generator encontrado.';

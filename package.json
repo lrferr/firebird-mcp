@@ -1,7 +1,7 @@
 {
-  "name": "firebird-mcp",
-  "version": "1.0.10",
-  "description": "Servidor MCP completo para Firebird Database com operações DDL, DML, DCL, monitoramento e auditoria",
+  "name": "firebird_mcp_server",
+  "version": "1.0.0",
+  "description": "Servidor MCP (Model Context Protocol) para Firebird Database - Desenvolvido pela CSGD/AGTIC/UFPR",
   "main": "src/index.js",
   "bin": {
     "firebird-mcp": "bin/firebird-mcp-cli.js",
@@ -17,6 +17,7 @@
     "test:performance": "node tests/performance/test-performance.js",
     "test:all": "node tests/test-main.js",
     "test:quick": "node tests/unit/test-ddl.js && node tests/security/test-security.js",
+    "test:app": "node test-app.js",
     "lint": "eslint src/",
     "format": "prettier --write src/",
     "install-setup": "node install.js",
@@ -53,19 +54,20 @@
     "embedded-database"
   ],
   "author": {
-    "name": "Leandro Ferreira",
-    "email": "lrferr@gmail.com",
-    "url": "https://github.com/lrferr"
+    "name": "CSGD - Coordenadoria de Software e Gestão de Dados",
+    "organization": "AGTIC - Agência de Tecnologia da Informação e Comunicação",
+    "institution": "UFPR - Universidade Federal do Paraná",
+    "url": "https://gitlab.ufpr.br/mcp"
   },
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lrferr/firebird-node-mcp.git"
+    "url": "git+https://gitlab.ufpr.br/mcp/firebird_mcp_server.git"
   },
   "bugs": {
-    "url": "https://github.com/lrferr/firebird-node-mcp/issues"
+    "url": "https://gitlab.ufpr.br/mcp/firebird_mcp_server/-/issues"
   },
-  "homepage": "https://github.com/lrferr/firebird-node-mcp#readme",
+  "homepage": "https://gitlab.ufpr.br/mcp/firebird_mcp_server#readme",
   "readme": "README.md",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.17.5",

@@ -14,7 +14,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const projectRoot = join(__dirname, '..');
 
-console.log(chalk.blue('🔧 Firebird MCP Server - Post-installation setup'));
+console.log(chalk.blue('🔧 Firebird MCP Server - CSGD/AGTIC/UFPR - Post-installation setup'));
 
 // Check if .env file exists, if not create from example
 const envPath = join(projectRoot, '.env');

@@ -703,16 +703,16 @@ export class DCLOperations {
   async userExists(db, username) {
     return new Promise((resolve, reject) => {
       const query = `
-        SELECT COUNT(*) as COUNT
+        SELECT RDB$USER
         FROM RDB$USERS
-        WHERE RDB$USER = ?
+        WHERE RDB$USER = '${username}'
       `;
       
-      db.query(query, [username], (err, result) => {
+      db.query(query, (err, result) => {
         if (err) {
           reject(err);
         } else {
-          resolve(result.length > 0 && result[0].COUNT > 0);
+          resolve(result.length > 0);
         }
       });
     });
@@ -721,16 +721,16 @@ export class DCLOperations {
   async roleExists(db, roleName) {
     return new Promise((resolve, reject) => {
       const query = `
-        SELECT COUNT(*) as COUNT
+        SELECT RDB$ROLE_NAME
         FROM RDB$ROLES
-        WHERE RDB$ROLE_NAME = ?
+        WHERE RDB$ROLE_NAME = '${roleName}'
       `;
       
-      db.query(query, [roleName], (err, result) => {
+      db.query(query, (err, result) => {
         if (err) {
           reject(err);
         } else {
-          resolve(result.length > 0 && result[0].COUNT > 0);
+          resolve(result.length > 0);
         }
       });
     });

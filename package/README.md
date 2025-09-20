@@ -1,6 +1,10 @@
 # Firebird MCP Server
 
-Servidor MCP (Model Context Protocol) completo para Firebird Database com operações DDL, DML, DCL, monitoramento e auditoria.
+**Servidor MCP (Model Context Protocol) para Firebird Database**
+
+Desenvolvido pela **CSGD** (Coordenadoria de Software e Gestão de Dados) da **AGTIC** (Agência de Tecnologia da Informação e Comunicação) da **UFPR** (Universidade Federal do Paraná).
+
+Este servidor oferece operações completas DDL, DML, DCL, monitoramento e auditoria para bancos de dados Firebird através do protocolo MCP.
 
 ## 🚀 Características
 
@@ -24,8 +28,8 @@ Servidor MCP (Model Context Protocol) completo para Firebird Database com opera�
 
 1. **Clone o repositório:**
 ```bash
-git clone https://github.com/lrferr/firebird-node-mcp.git
-cd firebird-node-mcp
+git clone https://gitlab.ufpr.br/mcp/firebird_mcp_server.git
+cd firebird_mcp_server
 ```
 
 2. **Instale as dependências:**
@@ -310,9 +314,9 @@ Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE](LICE
 
 ## 🆘 Suporte
 
-- **Issues**: [GitHub Issues](https://github.com/lrferr/firebird-node-mcp/issues)
-- **Documentação**: [Wiki](https://github.com/lrferr/firebird-node-mcp/wiki)
-- **Email**: lrferr@gmail.com
+- **Issues**: [GitLab Issues](https://gitlab.ufpr.br/mcp/firebird_mcp_server/-/issues)
+- **Documentação**: [Wiki do Projeto](https://gitlab.ufpr.br/mcp/firebird_mcp_server/-/wikis/home)
+- **Contato**: CSGD/AGTIC/UFPR
 
 ## 🙏 Agradecimentos
 
@@ -331,4 +335,4 @@ Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE](LICE
 
 ---
 
-**Desenvolvido com ❤️ por [Leandro Ferreira](https://github.com/lrferr)**
+**Desenvolvido com ❤️ pela [CSGD/AGTIC/UFPR](https://gitlab.ufpr.br/mcp)**
